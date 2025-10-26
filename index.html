@@ -1,78 +1,95 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard ULALA</title>
-    <style>
-        /* Gaya umum */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f3f4f6;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden; /* supaya tidak muncul scrollbar vertikal */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard ULALA</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        /* Kontainer utama */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: white;
-            width: 100%;
-            height: 100vh;
-            box-sizing: border-box;
-            padding: 20px;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      width: 100%;
+      height: 100vh;
+      box-sizing: border-box;
+      padding: 20px;
+    }
 
-        /* Judul dan keterangan */
-        h1 {
-            color: #004578;
-            text-align: center;
-            margin: 0;
-        }
+    h1 {
+      color: #004578;
+      text-align: center;
+      margin: 0;
+    }
 
-        p {
-            color: #333;
-            text-align: center;
-            margin: 8px 0 16px 0;
-        }
+    p {
+      color: #333;
+      text-align: center;
+      margin: 8px 0 16px 0;
+    }
 
-        /* Tampilan frame Excel */
-        iframe {
-            flex: 1; /* biar otomatis isi ruang tersisa */
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-        }
+    /* Bungkus iframe agar bisa diskalakan */
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+    }
 
-        /* Responsif untuk layar kecil (HP / iPad vertikal) */
-        @media (max-width: 768px) {
-            body {
-                overflow: auto;
-            }
-            .container {
-                height: auto;
-                padding: 10px;
-            }
-            iframe {
-                height: 80vh;
-            }
-        }
-    </style>
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform-origin: top left;
+      transition: transform 0.3s ease;
+    }
+
+    /* Mode normal untuk layar besar (tidak diskalakan) */
+    @media (min-width: 1025px) {
+      iframe {
+        transform: scale(1);
+      }
+    }
+
+    /* Mode auto-scale untuk iPad / layar kecil */
+    @media (max-width: 1024px) {
+      iframe {
+        transform: scale(0.8); /* sesuaikan skala di sini */
+        width: 125%; /* kompensasi agar area tetap penuh */
+        height: 125%;
+      }
+    }
+
+    /* Untuk HP lebih kecil lagi */
+    @media (max-width: 600px) {
+      iframe {
+        transform: scale(0.7);
+        width: 140%;
+        height: 140%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📊 Dashboard Kinerja _ UP3 Tolitoli</h1>
-        <p>Data bersumber dari file Excel di SharePoint</p>
+  <div class="container">
+    <h1>📊 Dashboard Kinerja UP3 Tolitoli_1</h1>
+    <p>Data bersumber dari file Excel di SharePoint</p>
 
-        <!-- Ganti link di bawah dengan link embed dari file Excel kamu -->
-        <iframe 
-            src="https://1drv.ms/x/c/d28a719c71767940/IQRh9Yi3Tci4TobT4BGKTj69AU5L6uhDItOzEzm_9CgySE4?em=2&wdAllowInteractivity=False&Item='DBRD'!A1%3AY54&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True" 
-            title="Dashboard Excel">
-        </iframe>
+    <div class="iframe-wrapper">
+      <iframe 
+        src="https://1drv.ms/x/c/d28a719c71767940/IQRh9Yi3Tci4TobT4BGKTj69AU5L6uhDItOzEzm_9CgySE4?em=2&wdAllowInteractivity=False&Item='DBRD'!A1%3AY54&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True" 
+        title="Dashboard Excel">
+      </iframe>
     </div>
+  </div>
 </body>
 </html>
