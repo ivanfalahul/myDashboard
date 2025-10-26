@@ -12,6 +12,8 @@
       padding: 0;
       height: 100vh;
       overflow: hidden;
+      transform-origin: top left;
+      transition: transform 0.3s ease;
     }
 
     .container {
@@ -37,59 +39,54 @@
       margin: 8px 0 16px 0;
     }
 
-    /* Bungkus iframe agar bisa diskalakan */
-    .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      flex: 1;
-      overflow: hidden;
-    }
-
     iframe {
+      flex: 1;
       width: 100%;
       height: 100%;
       border: none;
-      transform-origin: top left;
-      transition: transform 0.3s ease;
-    }
-
-    /* Mode normal untuk layar besar (tidak diskalakan) */
-    @media (min-width: 1025px) {
-      iframe {
-        transform: scale(1);
-      }
-    }
-
-    /* Mode auto-scale untuk iPad / layar kecil */
-    @media (max-width: 1024px) {
-      iframe {
-        transform: scale(0.8); /* sesuaikan skala di sini */
-        width: 125%; /* kompensasi agar area tetap penuh */
-        height: 125%;
-      }
-    }
-
-    /* Untuk HP lebih kecil lagi */
-    @media (max-width: 600px) {
-      iframe {
-        transform: scale(0.7);
-        width: 140%;
-        height: 140%;
-      }
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>📊 Dashboard Kinerja UP3 Tolitoli_1</h1>
+    <h1>📊 Dashboard Kinerja UP3 Tolitoli_2</h1>
     <p>Data bersumber dari file Excel di SharePoint</p>
 
-    <div class="iframe-wrapper">
-      <iframe 
-        src="https://1drv.ms/x/c/d28a719c71767940/IQRh9Yi3Tci4TobT4BGKTj69AU5L6uhDItOzEzm_9CgySE4?em=2&wdAllowInteractivity=False&Item='DBRD'!A1%3AY54&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True" 
-        title="Dashboard Excel">
-      </iframe>
-    </div>
+    <iframe 
+      src="https://1drv.ms/x/c/d28a719c71767940/IQRh9Yi3Tci4TobT4BGKTj69AU5L6uhDItOzEzm_9CgySE4?em=2&wdAllowInteractivity=False&Item='DBRD'!A1%3AY54&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True" 
+      title="Dashboard Excel">
+    </iframe>
   </div>
+
+  <script>
+    // Deteksi lebar layar dan terapkan zoom otomatis
+    function adjustZoom() {
+      const width = window.innerWidth;
+      const body = document.body;
+
+      if (width <= 480) {
+        body.style.transform = "scale(0.7)";
+        body.style.width = "140%";
+        body.style.height = "140%";
+      } else if (width <= 768) {
+        body.style.transform = "scale(0.8)";
+        body.style.width = "125%";
+        body.style.height = "125%";
+      } else if (width <= 1024) {
+        body.style.transform = "scale(0.9)";
+        body.style.width = "112%";
+        body.style.height = "112%";
+      } else {
+        body.style.transform = "scale(1)";
+        body.style.width = "100%";
+        body.style.height = "100%";
+      }
+    }
+
+    // Jalankan saat halaman dimuat & saat ukuran layar berubah
+    window.addEventListener('load', adjustZoom);
+    window.addEventListener('resize', adjustZoom);
+  </script>
 </body>
 </html>
